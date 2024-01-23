@@ -1,0 +1,49 @@
+<% include ./partials/header.ejs %>
+
+<div class="profile w-full min-h-screen bg-zinc-800 text-white pt-1">
+    <form id="uploadform"  hidden  action="/fileupload" method="post" enctype="multipart/form-data">
+        <input type="file" name="images">
+    </form>
+    <div class="profedts flex flex-col items-center justify-center mt-20">
+     <div class="relative">
+
+        <span id="uploadicon"class="w-8 h-7 absolute bottom-0 rounded-full flex item-center justify-center right-0 bg-zinc-200 ">
+            <i class= "text-zinc-800 ri-pencil-line"></i>
+        </span>
+        <div style="height: 200px; width: 200px;" class=" bg-zinc-200 rounded-full overflow-hidden">
+            <img class="w-full h-full object-cover" src="/images/uploads/<%= user.profileImage  %>" alt="">
+        </div>
+
+     </div>
+
+    
+        <h1 class="text-3xl font-semibold mt-5"><%= user.username  %></h1>
+        <h3 class="text-md"><%= user.fullname  %></h3>
+       
+       
+         <a href="/add" class="px-10 py-2 rounded-lg bg-red-700 mt-10 font-semibold text-xs ">Add New Post</a>
+    </div>
+    <div class="cards flex px-10 mt-10 flex-wrap gap-10 ">
+        <div class="card">
+            
+            <div class="w-52 h-40 bg-zinc-200 rounded-lg overflow-hidden">
+                <img class="w-full h-full object-cover " src="/images/uploads/<%= user?.post[1]?.image%>" alt="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTcFI6hTmgUtdxQTZktMt5KgEbySf4mtRgfQ&usqp=CAU">
+            </div>
+        <a href="/show/post" class= "inline-block font-xl font-semibold mt-3" > Your Pins</a>
+        <h5 class="text-sm w-14 font-medium  opacity-60"><%= user.post.length  %></h5>
+        </div>
+        
+    </div>
+</div>
+
+<script>
+
+     document.querySelector("#uploadicon").addEventListener("click", function(){
+        document.querySelector("#uploadform input").click();
+     })
+document.querySelector("#uploadform input").addEventListener("change", function (){
+    document.querySelector("#uploadform").submit()
+})
+</script>
+
+<% include ./partials/footer.ejs %>
